@@ -1,0 +1,6 @@
+The file linrgrTonsCoeffsFINAL contains the linear regression coefficients used in my talk. They are based on 500 samples created using COBRA, with input files created by the datacleaning.py file with a seed of 0. 
+These simulations were ran when the wind plant emission rate was still nonzero (why the wind associated coefficients are relatively high. For our optimzation, we artifically made the associated coefficients 0, but it would be 
+worthwhile to rerun with the updated rates.
+
+The file linrgrConvertedDataCoeffs contains the linear regression coefficients based on COBRA input files with emissions levels in pounds, not tons, created with a seed of 5. I divided the public health cost output by 2000 and 
+ran this linear regression as a sanity check for the FINAL values.
