@@ -8,11 +8,11 @@ def create_samples(num_samples,seed):
     rand.seed(seed)
     print("starting...")
     for j in range(num_samples):
-        file = pd.read_csv("C:\\Users\\elrog\\COBRA\\input files\\new data\\BatchFileCreationCommands\\GenericBatchFileWithInfo.csv")
+        file = pd.read_csv("C:\\Users\\Loaner\\Desktop\\powersystemspublichealth\\BatchFileCreationCommands\\GenericBatchFileWithInfo.csv")
 
-        generic_file = pd.read_csv("C:\\Users\\elrog\\COBRA\\input files\\new data\\BatchFileCreationCommands\\GenericBatchFileALL.csv")
+        generic_file = pd.read_csv("C:\\Users\\Loaner\\Desktop\\powersystemspublichealth\\BatchFileCreationCommands\\GenericBatchFileALL.csv")
         # file containing emissions rates for each 
-        em_info = pd.read_csv("C:\\Users\\elrog\\COBRA\\input files\\new data\\BatchFileCreationCommands\\StateRatesInfo.csv")
+        em_info = pd.read_csv("C:\\Users\\Loaner\\Desktop\\powersystemspublichealth\\BatchFileCreationCommands\\StateRatesInfo.csv")
 
 
         # target_array = target_file.to_numpy()
@@ -61,13 +61,6 @@ def create_samples(num_samples,seed):
             # target_array[i][13] = MW * em[3][1] / 2000
 
 
-
-            # print(NO2)
-            # print(SO2)
-            # print(PM25)
-
-            # return
-
         # insert relevant values
         file.insert(8, 'NOx', No2) # Insert 'C' at index 1 (second column)
         file.insert(9, 'SO2', So2) # Insert 'C' at index 1 (second column)
@@ -112,26 +105,31 @@ def create_samples(num_samples,seed):
         final_target_file.to_csv(name,index=False)
 
 
+# still need to update file paths
 def create_batch_file(num_samples, group):
     file_index = 1
     for i in range(int(num_samples / group)):
         filename = "batch"+str(i+1) + ".txt"
         with open(filename, "w") as file:
             for j in range(group):
-                scenario = "\"C:\\Users\\elrog\\COBRA\\input files\\new data\\EmissionsScenarios\\EmissionsScenariosTest5_seed1\\Emissions_Scenario" + str(file_index)+".csv\""
-                outcome = "\"C:\\Users\\elrog\\COBRA\\input files\\new data\\Output_080825_1\\Outcome"+str(file_index)+".csv\""
-                baseline = "\"C:\\Users\\elrog\\COBRA\\input files\\new data\\Emissions_2023_baseline_data.csv\""
+                # change this
+                scenario = "\"C:\\Users\\Loaner\\Desktop\\powersystemspublichealth\\EmissionsScenarios\\Scenarios082325\\Emissions_Scenario" + str(file_index)+".csv\""
+                outcome = "\"C:\\Users\\Loaner\\Desktop\\COBRA Outcomes\\Experiment 082325\\Outcome"+str(file_index)+".csv\""
+                # change baseline file
+                baseline = "\"C:\\Users\\Loaner\\Desktop\\powersystemspublichealth\\BatchFileCreationCommands\\Emissions_2023.csv\""
+                population = "\"C:\\Users\\Loaner\\COBRA\\input files\\default data\\default_2023_population_data.csv\""
+                incidence_data = "\"C:\\Users\\Loaner\\COBRA\\input files\\default data\\default_2023_incidence_data.csv\""
+                valuation_data = "\"C:\\Users\\Loaner\\COBRA\\input files\\default data\\default_2023_valuation_data.csv\""
                 # filename = "\"C:\\Users\\elrog\\COBRA\\cobra_console.exe\" -d \"C:\\Users\\elrog\\COBRA\\data\\cobra.db\" -b " + baseline + " -c "+scenario+ " -p \"C:\\Users\\elrog\\COBRA\\input files\\new data\\default_2023_population_data.csv\" -i \"C:\\Users\\elrog\\COBRA\\input files\\default_2023_incidence_data.csv\" -v \"C:\\Users\\elrog\\COBRA\\input files\\new data\\default_2023_valuation_data.csv\" -o "+outcome+ " --discountrate 2 \n \n"        
 
-                file.write("\"C:\\Users\\elrog\\COBRA\\cobra_console.exe\" -d \"C:\\Users\\elrog\\COBRA\\data\\cobra.db\" -b " + baseline + " -c "+scenario+ " -p \"C:\\Users\\elrog\\COBRA\\input files\\new data\\default_2023_population_data.csv\" -i \"C:\\Users\\elrog\\COBRA\\input files\\new data\\default_2023_incidence_data.csv\" -v \"C:\\Users\\elrog\\COBRA\\input files\\new data\\default_2023_valuation_data.csv\" -o "+outcome+ " --discountrate 2 \n \n")              
+                file.write("\"C:\\Users\\Loaner\\COBRA\\cobra_console.exe\" -d \"C:\\Users\\Loaner\\COBRA\\data\\cobra.db\" -b " + baseline + " -c "+scenario+ " -p " + population + " -i " + incidence_data + " -v " + valuation_data +" -o "+outcome+ " --discountrate 2 \n \n")              
                 file_index+=1
                 # print(filename)
 
 # print("\"C:\\Users\\elrog\\COBRA\\input files\\new data\\ScenarioEmissions\BatchFile.csv\"")
 # create_samples(500,1)
-create_batch_file(435,435)
-
-
-# create_batch_file(500,500)
+# create_samples(10,0)
+# create_samples(800,0)
+create_batch_file(800,800)
 
 
