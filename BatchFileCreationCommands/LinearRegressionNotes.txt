@@ -4,3 +4,6 @@ worthwhile to rerun with the updated rates.
 
 The file linrgrConvertedDataCoeffs contains the linear regression coefficients based on COBRA input files with emissions levels in pounds, not tons, created with a seed of 5. I divided the public health cost output by 2000 and 
 ran this linear regression as a sanity check for the FINAL values.
+
+Update 8/26/25: LinReg800SamplesSeed0 are the flattened cost coefficients based on 800 samples (with a 75/25 train/test split). The samples were generated with cobra with a seed of 0
+using the datacleaning.py file. They sohuld be unflattened for use in matpower using the matpower.ipynb file.
