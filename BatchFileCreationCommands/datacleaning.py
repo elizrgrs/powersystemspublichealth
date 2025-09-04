@@ -78,7 +78,7 @@ def create_samples(num_samples,seed):
         final_file = final_file.drop('Bus number', axis=1) 
         final_file = final_file.drop('Fuel Type', axis=1)
 
-        final_file.insert(0,'ID', [2]*len(No2))
+        final_file = final_file.insert(0,'ID', [2]*len(No2))
 
         # print(final_file.head())
         # print(final_file.head())
