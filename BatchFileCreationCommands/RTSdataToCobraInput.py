@@ -63,16 +63,13 @@ def create_samples(num_samples,seed):
         final = final.drop('Max MW', axis=1) 
         final = final.drop('MW', axis=1)
         final = final.drop('Bus ID', axis=1) 
-        final = final.drop('Fuel Type', axis=1)\
-        
-
-
+        final = final.drop('Fuel Type', axis=1)
 
         # print(final_file.head())
         # print(final_file.head())
 
         # Save DataFrame to a CSV file
-        name1 = 'DataFile' + str(j + 1) + '.csv'
+        name1 = 'DataFile' + str(j + 901) + '.csv'
         # name1 = 'testDataFile.csv'
         file.to_csv(name1, index=False)
 
@@ -85,7 +82,7 @@ def create_samples(num_samples,seed):
 
         # print(final_target_file.head())
 
-        name = 'Emissions_Scenario' + str(j + 1) + '.csv'
+        name = 'Emissions_Scenario' + str(j + 901) + '.csv'
         # name = 'testScenario.csv'
 
         # final_target_file.astype(str)
@@ -95,16 +92,16 @@ def create_samples(num_samples,seed):
 
 # still need to update file paths
 def create_batch_file(num_samples, group):
-    file_index = 1
+    file_index = 901
     for i in range(int(num_samples / group)):
-        filename = "batch"+str(i+1) + ".txt"
+        filename = "batch2" + ".txt"
         with open(filename, "w") as file:
             for j in range(group):
                 # change this
-                scenario = "\"C:\\Users\\Loaner\\Desktop\\powersystemspublichealth\\EmissionsScenarios\\Scenarios090425\\Emissions_Scenario" + str(file_index)+".csv\""
-                outcome = "\"C:\\Users\\Loaner\\Desktop\\COBRA Outcomes\\Experiment 090425\\Outcome"+str(file_index)+".csv\""
-                # change baseline file
-                baseline = "\"C:\\Users\\Loaner\\Desktop\\powersystemspublichealth\\BatchFileCreationCommands\\Emissions_2023.csv\""
+                scenario = "\"C:\\Users\\Loaner\\Desktop\\EmissionsScenarios\\Scenarios090725\\Emissions_Scenario" + str(file_index)+".csv\""
+                outcome = "\"C:\\Users\\Loaner\\Desktop\\COBRA Outcomes\\Experiment 090725\\Outcome"+str(file_index)+".csv\""
+                # change baseline file"C:\Users\Loaner\Desktop\powersystemspublichealth\BatchFileCreationCommands\RTS_Emissions_Baseline.csv"
+                baseline = "\"C:\\Users\\Loaner\\Desktop\\powersystemspublichealth\\BatchFileCreationCommands\\RTS_Emissions_Baseline.csv\""
                 population = "\"C:\\Users\\Loaner\\COBRA\\input files\\default data\\default_2023_population_data.csv\""
                 incidence_data = "\"C:\\Users\\Loaner\\COBRA\\input files\\default data\\default_2023_incidence_data.csv\""
                 valuation_data = "\"C:\\Users\\Loaner\\COBRA\\input files\\default data\\default_2023_valuation_data.csv\""
@@ -118,5 +115,7 @@ def create_batch_file(num_samples, group):
 # create_samples(500,1)
 # create_samples(10,0)
 # create_samples(800,0)
-create_samples(3,0)
+# create_samples(900,2)
+create_batch_file(900,900)  
+
 
