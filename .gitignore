@@ -2,3 +2,6 @@ EmissionsScenarios/*
 batchfiles/*
 *.mat
 *.mlx
+DataFile*
+Emissions_Scenario*
+
