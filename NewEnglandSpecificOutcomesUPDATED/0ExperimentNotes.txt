@@ -1,0 +1,12 @@
+        if(i == 0):
+            MW = carbon_emi["Carbon Cost"]
+        elif(i==1):
+            MW = low_health["Low Health Bound"]
+        elif(i==2):
+            MW = high_health["High Health Bound"]
+        elif(i==3):
+            MW = mixed_high["Mixed High Health Bound"]
+        elif(i==4):
+            MW = mixed_low["Mixed Low Health Bound"]
+        else:
+            MW = origional["Operational Cost"]
