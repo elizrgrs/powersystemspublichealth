@@ -1,18 +1,40 @@
+# This file is for creating COBRA input samples when your test grid and emissions data are separate
+# currently, it is set up for the New England test grid
+# functions:
+#   #   create_samples:
+#   #       inputs: number of samples to create, seed for rng
+#   #       outputs: 
+#   #           DataFile: # contains info associatied with the emissions scenario, 
+#                           ie power level of generator, emissions levels of each pollutant, generator info
+#   #           EmissionsScenario: a COBRA input file
+#   #    create_batch_file:
+#   #       inputs:
+#   #       outputs:
+
+
 import pandas as pd
 from pandas import DataFrame, concat
 import numpy as np
 import random as rand
+import os
 
+# Change this to be your specific path to the powersystems folder
+power_systems_dir = '/Users/elizabethrogers/Desktop/powersystemspublichealth'
+
+os.chdir(power_systems_dir)
+
+batch_file_dir = 'BatchFileGeneration'
+new_england_generation_dir = 'NewEnglandFiles'
 
 def create_samples(num_samples,seed):
     rand.seed(seed)
     print("starting...")
     for j in range(num_samples):
-        file = pd.read_csv("C:\\Users\\Loaner\\Desktop\\powersystemspublichealth\\BatchFileCreationCommands\\GenericBatchFileWithInfo.csv")
+        file = pd.read_csv(os.path.join(batch_file_dir,new_england_generation_dir,"GenericBatchFileWithInfo.csv"))
 
-        generic_file = pd.read_csv("C:\\Users\\Loaner\\Desktop\\powersystemspublichealth\\BatchFileCreationCommands\\GenericBatchFileALL.csv")
+        generic_file = pd.read_csv(os.path.join(batch_file_dir,new_england_generation_dir,"GenericBatchFileALL.csv"))
         # file containing emissions rates for each 
-        em_info = pd.read_csv("C:\\Users\\Loaner\\Desktop\\powersystemspublichealth\\BatchFileCreationCommands\\StateRatesInfo.csv")
+        em_info = pd.read_csv(os.path.join(batch_file_dir,new_england_generation_dir,"StateRatesInfo.csv"))
 
 
         # target_array = target_file.to_numpy()
@@ -106,25 +128,24 @@ def create_samples(num_samples,seed):
 
 
 # still need to update file paths
-def create_batch_file(num_samples, group):
-    file_index = 1
-    for i in range(int(num_samples / group)):
+def create_batch_file(num_samples, output_directory):
+    # file_index = 1
+    for i in range(num_samples):
         filename = "batch"+str(i+1) + ".txt"
         with open(filename, "w") as file:
-            for j in range(group):
-                # change this
-                scenario = "\"C:\\Users\\Loaner\\Desktop\\powersystemspublichealth\\EmissionsScenarios\\Scenarios082325\\Emissions_Scenario" + str(file_index)+".csv\""
-                outcome = "\"C:\\Users\\Loaner\\Desktop\\COBRA Outcomes\\Experiment 082325\\Outcome"+str(file_index)+".csv\""
-                # change baseline file
-                baseline = "\"C:\\Users\\Loaner\\Desktop\\powersystemspublichealth\\BatchFileCreationCommands\\Emissions_2023.csv\""
-                population = "\"C:\\Users\\Loaner\\COBRA\\input files\\default data\\default_2023_population_data.csv\""
-                incidence_data = "\"C:\\Users\\Loaner\\COBRA\\input files\\default data\\default_2023_incidence_data.csv\""
-                valuation_data = "\"C:\\Users\\Loaner\\COBRA\\input files\\default data\\default_2023_valuation_data.csv\""
-                # filename = "\"C:\\Users\\elrog\\COBRA\\cobra_console.exe\" -d \"C:\\Users\\elrog\\COBRA\\data\\cobra.db\" -b " + baseline + " -c "+scenario+ " -p \"C:\\Users\\elrog\\COBRA\\input files\\new data\\default_2023_population_data.csv\" -i \"C:\\Users\\elrog\\COBRA\\input files\\default_2023_incidence_data.csv\" -v \"C:\\Users\\elrog\\COBRA\\input files\\new data\\default_2023_valuation_data.csv\" -o "+outcome+ " --discountrate 2 \n \n"        
+            # change this
+            scenario = "\"C:\\Users\\Loaner\\Desktop\\powersystemspublichealth\\EmissionsScenarios\\Scenarios082325\\Emissions_Scenario" + str(i+1)+".csv\""
+            outcome = "\"C:\\Users\\Loaner\\Desktop\\COBRA Outcomes\\Experiment 082325\\Outcome"+str(i+1)+".csv\""
+            # change baseline file
+            baseline = "\"C:\\Users\\Loaner\\Desktop\\powersystemspublichealth\\BatchFileCreationCommands\\Emissions_2023.csv\""
+            population = "\"C:\\Users\\Loaner\\COBRA\\input files\\default data\\default_2023_population_data.csv\""
+            incidence_data = "\"C:\\Users\\Loaner\\COBRA\\input files\\default data\\default_2023_incidence_data.csv\""
+            valuation_data = "\"C:\\Users\\Loaner\\COBRA\\input files\\default data\\default_2023_valuation_data.csv\""
+            # filename = "\"C:\\Users\\elrog\\COBRA\\cobra_console.exe\" -d \"C:\\Users\\elrog\\COBRA\\data\\cobra.db\" -b " + baseline + " -c "+scenario+ " -p \"C:\\Users\\elrog\\COBRA\\input files\\new data\\default_2023_population_data.csv\" -i \"C:\\Users\\elrog\\COBRA\\input files\\default_2023_incidence_data.csv\" -v \"C:\\Users\\elrog\\COBRA\\input files\\new data\\default_2023_valuation_data.csv\" -o "+outcome+ " --discountrate 2 \n \n"        
 
-                file.write("\"C:\\Users\\Loaner\\COBRA\\cobra_console.exe\" -d \"C:\\Users\\Loaner\\COBRA\\data\\cobra.db\" -b " + baseline + " -c "+scenario+ " -p " + population + " -i " + incidence_data + " -v " + valuation_data +" -o "+outcome+ " --discountrate 2 \n \n")              
-                file_index+=1
-                # print(filename)
+            file.write("\"C:\\Users\\Loaner\\COBRA\\cobra_console.exe\" -d \"C:\\Users\\Loaner\\COBRA\\data\\cobra.db\" -b " + baseline + " -c "+scenario+ " -p " + population + " -i " + incidence_data + " -v " + valuation_data +" -o "+outcome+ " --discountrate 2 \n \n")              
+            # file_index+=1
+            # print(filename)
 
 # print("\"C:\\Users\\elrog\\COBRA\\input files\\new data\\ScenarioEmissions\BatchFile.csv\"")
 # create_samples(500,1)
