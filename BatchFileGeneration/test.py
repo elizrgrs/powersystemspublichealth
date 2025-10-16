@@ -1,3 +1,6 @@
+## this file is the script version of NewEngland_generateCOBRAinputsAtSpecificPowerLevels.ipynb
+# I reccomend using that file instead - this one is out of date
+
 import pandas as pd
 from pandas import DataFrame, concat
 import numpy as np
